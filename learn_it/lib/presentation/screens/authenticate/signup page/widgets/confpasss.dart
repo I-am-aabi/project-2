@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:learn_it/presentation/screens/authenticate/signup%20page/functions/signup.dart';
+
+class Username extends StatelessWidget {
+  const Username({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 280,
+          height: 40,
+          child: TextField(
+            controller: confpassController,
+            keyboardType: TextInputType.visiblePassword,
+            cursorColor: Colors.black,
+            style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+            decoration: const InputDecoration(
+              hintText: 'Tony Stark',
+              hintStyle: TextStyle(color: Colors.black38,fontSize: 18),
+              
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
