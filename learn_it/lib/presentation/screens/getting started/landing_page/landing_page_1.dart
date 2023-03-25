@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_it/presentation/screens/authenticate/starting%20page/functions/check%20_seen.dart';
 import 'package:learn_it/presentation/screens/authenticate/starting%20page/starting_page.dart';
 import 'package:learn_it/presentation/screens/getting%20started/landing_page/widgets/landing_pages.dart';
 import 'package:learn_it/presentation/screens/getting%20started/landing_page/widgets/continue_btn.dart';
-import 'package:learn_it/presentation/screens/home/widgets/navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

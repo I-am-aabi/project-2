@@ -1,12 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/authenticate/starting%20page/widgets/signin_signup.dart';
+import 'package:learn_it/presentation/screens/home/widgets/navigation.dart';
 
 class StartingPage extends StatelessWidget {
   const StartingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    _checkLogin(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -25,17 +27,15 @@ class StartingPage extends StatelessWidget {
               height: 20,
             ),
             const SizedBox(
-              width: 250,
+                width: 250,
                 child: Text(
-              'Welcome to the world of unlimited knowledge and opportunities',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'PoppinsMedium',
-                fontSize: 18
-              ),
-              
-            )),
-            const SizedBox(height: 50,),
+                  'Welcome to the world of unlimited knowledge and opportunities',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontFamily: 'PoppinsMedium', fontSize: 18),
+                )),
+            const SizedBox(
+              height: 50,
+            ),
             const Signinup()
           ],
         ),
@@ -43,6 +43,15 @@ class StartingPage extends StatelessWidget {
     );
   }
 }
-_checkLogin()async{
- await FirebaseAuth.instance.sign
+
+_checkLogin(context) {
+  User? user = FirebaseAuth.instance.currentUser;
+  bool loginstatus = user != null;
+  if (loginstatus) {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Navbar(),
+        ));
+  }
 }
