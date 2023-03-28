@@ -8,13 +8,12 @@ signIn(context) {
       .signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim())
-      .then((value) => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Yourcourses(),
-          )))
       .then((value) {
-    print('sign in successful');
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Yourcourses(),
+        ));
   }).onError((error, stackTrace) {
     print('error $error');
   });

@@ -1,12 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Addcourse extends StatelessWidget {
-  Addcourse({super.key});
+class Addcourse extends StatefulWidget {
+  const Addcourse({
+    super.key,
+    required this.databaseRef,
+  });
+  final CollectionReference databaseRef;
+
+  @override
+  State<Addcourse> createState() => _AddcourseState();
+}
+
+class _AddcourseState extends State<Addcourse> {
+  List<String> categories = [
+    'Coding',
+    'Design',
+    'Science',
+    'Language',
+    'Arts',
+    'Maths',
+    'Marketing',
+    'Business',
+    'Music',
+    'Productivity',
+    'Life style',
+    'Other'
+  ];
+
+  String dropdownvalue = 'Coding';
+
   final titlecontroller = TextEditingController();
+
   final discriptioncontroller = TextEditingController();
+
   final pricecontroller = TextEditingController();
-  final CollectionReference databaseRef = FirebaseFirestore.instance.collection('courses');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +56,7 @@ class Addcourse extends StatelessWidget {
                 child: TextField(
                   controller: titlecontroller,
                   autofocus: true,
-                  maxLength: 20,
+                  maxLength: 30,
                   decoration: const InputDecoration(
                       hintText: ' Course Title',
                       border: InputBorder.none,
@@ -38,14 +67,13 @@ class Addcourse extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
-                height: 50,
+                  height: 50,
                   decoration: BoxDecoration(
                       color: Colors.blue.shade50,
                       borderRadius: BorderRadius.circular(10)),
                   child: TextField(
                     keyboardType: TextInputType.number,
                     controller: pricecontroller,
-                    
                     maxLength: 10,
                     decoration: const InputDecoration(
                         hintText: 'Price',
@@ -53,7 +81,40 @@ class Addcourse extends StatelessWidget {
                         contentPadding: EdgeInsets.only(top: 6, left: 5)),
                   )),
             ),
-             Padding(
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Container(
+                height: 50,
+                decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(left: 3),
+                      child: Text('Category',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),),
+                    ),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                          value: dropdownvalue,
+                          items: categories.map((String item) {
+                            return DropdownMenuItem(value: item, child: Text(item));
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownvalue = newValue!;
+                            });
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
                   decoration: BoxDecoration(
@@ -74,13 +135,13 @@ class Addcourse extends StatelessWidget {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          databaseRef.doc(titlecontroller.text.toString()).set({
+          widget.databaseRef.doc(titlecontroller.text.toString()).set({
             'title': titlecontroller.text.toString(),
             'discription': discriptioncontroller.text.toString(),
-            'links': [] ,
+            'links': [],
             'discriptions': [],
-            'price' : pricecontroller.text.toString()
-            // 'links': ['434''ihwiuher']
+            'price': pricecontroller.text.toString(),
+            'category' : dropdownvalue
           });
           titlecontroller.clear();
           discriptioncontroller.clear();

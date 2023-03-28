@@ -3,13 +3,16 @@ import 'package:flutter/material.dart';
 
 class Lecturefield extends StatelessWidget {
   Lecturefield(
-      {super.key, required this.title, required this.documentSnapShot});
+      {super.key,
+      required this.title,
+      required this.documentSnapShot,
+      required this.databaseRef});
   final String title;
   final DocumentSnapshot documentSnapShot;
   final titlecontroller = TextEditingController();
-  final discriptioncontroller = TextEditingController();
-  final CollectionReference databaseRef =
-      FirebaseFirestore.instance.collection('courses');
+  final linkcontroller = TextEditingController();
+  final CollectionReference databaseRef;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +33,7 @@ class Lecturefield extends StatelessWidget {
                 child: TextField(
                   controller: titlecontroller,
                   autofocus: true,
-                  maxLength: 20,
+                  maxLength: 35,
                   decoration: const InputDecoration(
                       hintText: ' lecture Title',
                       border: InputBorder.none,
@@ -45,7 +48,7 @@ class Lecturefield extends StatelessWidget {
                       color: Colors.blue.shade50,
                       borderRadius: BorderRadius.circular(20)),
                   child: TextField(
-                    controller: discriptioncontroller,
+                    controller: linkcontroller,
                     maxLines: 1,
                     maxLength: 50,
                     decoration: const InputDecoration(
@@ -60,14 +63,15 @@ class Lecturefield extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           List links = documentSnapShot['links'];
-          links.add('${(links.length+1).toString()} ${'.'}${titlecontroller.text.toString()}');
+          links.add(
+              '${(links.length + 1).toString()} ${'.'}${titlecontroller.text.toString()}');
           List discriptions = documentSnapShot['discriptions'];
-          discriptions.add(discriptioncontroller.text.toString());
+          discriptions.add(linkcontroller.text.toString());
           databaseRef
               .doc(title)
               .update({'discriptions': links, 'links': discriptions});
           titlecontroller.clear();
-          discriptioncontroller.clear();
+          linkcontroller.clear();
           Navigator.pop(context);
         },
         child: const Icon(Icons.done),

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:teach_it/presentation/screens/home/add%20course/lecture_field.dart';
 
 class Addlectures extends StatelessWidget {
-  Addlectures(
-      {super.key, required this.heading, required this.documentSnapShot});
+  const Addlectures(
+      {super.key, required this.heading, required this.documentSnapShot, required this.dbRef});
   final String heading;
   final DocumentSnapshot documentSnapShot;
-  final CollectionReference dbRef =
-      FirebaseFirestore.instance.collection('courses');
+  final CollectionReference dbRef;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class Addlectures extends StatelessWidget {
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
             return ListView.builder(
-              itemCount: documentSnapShot['links'].length,
+              itemCount: documentSnapShot['discriptions'].length,
               itemBuilder: (context, index) {
                 return Card(
                     margin: const EdgeInsets.all(10),
@@ -48,6 +48,7 @@ class Addlectures extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => Lecturefield(
+                  databaseRef: dbRef,
                     title: heading, documentSnapShot: documentSnapShot),
               ));
         },
