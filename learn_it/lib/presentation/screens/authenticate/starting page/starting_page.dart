@@ -8,7 +8,7 @@ class StartingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _checkLogin(context);
+  
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -45,13 +45,5 @@ class StartingPage extends StatelessWidget {
 }
 
 _checkLogin(context) {
-  User? user = FirebaseAuth.instance.currentUser;
-  bool loginstatus = user != null;
-  if (loginstatus) {
-    Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const Navbar(),
-        ));
-  }
+  
 }

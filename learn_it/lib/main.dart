@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_it/presentation/screens/getting%20started/landing_page/landing_page_1.dart';
+import 'package:learn_it/presentation/screens/getting%20started/landing_page/functions/ckeckfirstscreen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Landing1(),
+      home: CheckfirstScreen(),
     );
   }
 }
