@@ -6,7 +6,7 @@ class Addlectures extends StatelessWidget {
   const Addlectures(
       {super.key, required this.heading, required this.documentSnapShot, required this.dbRef});
   final String heading;
-  final DocumentSnapshot documentSnapShot;
+  final Map<String,dynamic> documentSnapShot;
   final CollectionReference dbRef;
 
   @override

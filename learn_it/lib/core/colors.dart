@@ -8,20 +8,18 @@ Color nabaricon = Colors.black54;
 Color backGround = const Color.fromARGB(0, 215, 80, 80);
 Color containerclr = Colors.black;
 Color catgtextclr = Colors.black;
-getColor(int i) {
+getColor(int j) {
+ int i = j % 4;
   if (i == 0) {
     containerclr = Colors.purple.shade50;
     catgtextclr = Colors.purple.shade800;
-  }
-  else if (i == 1) {
+  } else if (i == 1) {
     containerclr = Colors.red.shade50;
     catgtextclr = Colors.red.shade800;
-  }
-  else if (i == 2) {
+  } else if (i == 2) {
     containerclr = Colors.green.shade50;
     catgtextclr = Colors.green.shade800;
-  }
-  else{
+  } else {
     containerclr = Colors.cyan.shade50;
     catgtextclr = Colors.cyan.shade800;
   }

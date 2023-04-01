@@ -1,16 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:teach_it/presentation/screens/authentication/authenticate/starting%20page/widgets/signin_signup.dart';
-import 'package:teach_it/presentation/screens/home/home.dart';
 
-class StartingPage extends StatefulWidget {
+class StartingPage extends StatelessWidget {
   const StartingPage({super.key});
 
-  @override
-  State<StartingPage> createState() => _StartingPageState();
-}
-
-class _StartingPageState extends State<StartingPage> {
   @override
  
 

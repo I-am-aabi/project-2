@@ -16,7 +16,7 @@ class Navbar extends StatefulWidget {
 final pageList = [
   const HomePage(),
   const CoursePage(),
-  const SearchPage(),
+   SearchPage(),
   const ProfilePage(),
 ];
 

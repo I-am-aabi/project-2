@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/core/colors.dart';
 import 'package:learn_it/presentation/screens/home/result/category_result.dart';
+import 'package:learn_it/presentation/screens/home/search%20page/functions/search_category.dart';
 
 class Categoryimg extends StatelessWidget {
   const Categoryimg(
@@ -15,11 +16,13 @@ class Categoryimg extends StatelessWidget {
   Widget build(BuildContext context) {
     getColor(color);
     return GestureDetector(
-        onTap: () {
+        onTap: () async {
+          categorycontroller.text = subject;
+          List<dynamic> courseList =await categoryget();
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Catresult(),
+                builder: (context) => Catresult(courselist: courseList),
               ));
         },
         child: Column(
@@ -38,8 +41,7 @@ class Categoryimg extends StatelessWidget {
               height: 140,
               width: 160,
               decoration: BoxDecoration(
-                  color: containerclr,
-                  borderRadius: BorderRadius.circular(20)),
+                  color: containerclr, borderRadius: BorderRadius.circular(20)),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(

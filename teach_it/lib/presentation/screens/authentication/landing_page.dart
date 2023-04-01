@@ -4,38 +4,32 @@ import 'package:teach_it/presentation/screens/authentication/authenticate/starti
 import 'package:teach_it/presentation/screens/home/home.dart';
 
 class Landingpage extends StatelessWidget {
-  const Landingpage({super.key});
-
+  Landingpage({super.key});
+  String? name = '';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Center(
-        child: ElevatedButton(
-          child: const Text('continue'),
-          onPressed: () {
-            _checkLogin(context);
-          },
-        ),
-      )),
+    return StreamBuilder(
+      stream: checklogin,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.data == true) {
+            return Yourcourses();
+          } else {
+            return const StartingPage();
+          }
+        }
+        return const CircularProgressIndicator();
+      },
     );
   }
 
-  _checkLogin(context) {
+  Stream checklogin = (() async* {
     User? user = FirebaseAuth.instance.currentUser;
     bool loginstatus = user != null;
     if (loginstatus) {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Yourcourses(),
-          )).onError((error, stackTrace) => print('error is here $error'));
+      yield true;
     } else {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => StartingPage(),
-          ));
+      yield false;
     }
-  }
+  })();
 }

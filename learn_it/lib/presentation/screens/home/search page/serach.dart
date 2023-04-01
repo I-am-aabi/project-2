@@ -3,7 +3,35 @@ import 'package:learn_it/presentation/screens/home/search%20page/widgets/course_
 import 'package:learn_it/presentation/screens/home/search%20page/widgets/explore.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+  SearchPage({super.key});
+  List<String> subjects = [
+    'Maths',
+    'Science',
+    'Arts',
+    'Language',
+    'Design',
+    'Coding',
+    'Marketing',
+    'Business',
+    'Music',
+    'Prodictivity',
+    'Lifestyle',
+    'Other'
+  ];
+  List<String> images = [
+    'assets/images/maths.png',
+    'assets/images/science.png',
+    'assets/images/arts.png',
+    'assets/images/language.png',
+    'assets/images/design.png',
+    'assets/images/programming.png',
+    'assets/images/marketing.png',
+    'assets/images/business.png',
+    'assets/images/music.png',
+    'assets/images/productivity.png',
+    'assets/images/lifestyle.png',
+    'assets/images/other.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -11,60 +39,42 @@ class SearchPage extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: ListView(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Explore(),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Categoryimg(
-                      path: 'assets/images/maths.png',
-                      color: 0,
-                      subject: 'Maths'),
-                  Categoryimg(
-                    path: 'assets/images/science.png',
-                    color: 1,
-                    subject: 'Science',
-                  )
-                ],
-              ),
-              const SizedBox(height: 20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Categoryimg(
-                      path: 'assets/images/arts.png',
-                      color: 2,
-                      subject: 'Arts'),
-                  Categoryimg(
-                    path: 'assets/images/language.png',
-                    color: 3,
-                    subject: 'Language',
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Categoryimg(
-                      path: 'assets/images/design.png',
-                      color: 0,
-                      subject: 'Design'),
-                  Categoryimg(
-                    path: 'assets/images/programming.png',
-                    color: 1,
-                    subject: 'Coding',
-                  )
-                ],
-              ),
-            ]),
+        child: SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Column(
+              children: [
+                const Explore(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Categoryimg(
+                                path: images[index + index],
+                                color: index + index,
+                                subject: subjects[index + index]),
+                            Categoryimg(
+                              path: images[index + 1 + index],
+                              color: index + 1 + index,
+                              subject: subjects[index + 1 + index],
+                            )
+                          ],
+                        );
+                      },
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(
+                          height: 20,
+                        );
+                      },
+                      itemCount: images.length ~/ 2),
+                ),
+              ]),
+        ),
       )),
     );
   }

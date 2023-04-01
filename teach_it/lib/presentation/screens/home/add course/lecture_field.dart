@@ -8,7 +8,7 @@ class Lecturefield extends StatelessWidget {
       required this.documentSnapShot,
       required this.databaseRef});
   final String title;
-  final DocumentSnapshot documentSnapShot;
+  final Map<String,dynamic> documentSnapShot;
   final titlecontroller = TextEditingController();
   final linkcontroller = TextEditingController();
   final CollectionReference databaseRef;
@@ -63,13 +63,13 @@ class Lecturefield extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           List links = documentSnapShot['links'];
-          links.add(
-              '${(links.length + 1).toString()} ${'.'}${titlecontroller.text.toString()}');
           List discriptions = documentSnapShot['discriptions'];
-          discriptions.add(linkcontroller.text.toString());
+          discriptions.add(
+              '${(links.length + 1).toString()} ${'.'}${titlecontroller.text.toString()}');
+          links.add(linkcontroller.text.toString());
           databaseRef
               .doc(title)
-              .update({'discriptions': links, 'links': discriptions});
+              .update({'discriptions': discriptions, 'links': links, 'lectures': links.length.toString()});
           titlecontroller.clear();
           linkcontroller.clear();
           Navigator.pop(context);

@@ -1,52 +1,78 @@
 import 'package:flutter/material.dart';
+import 'package:learn_it/core/colors.dart';
 
 class Resultcard extends StatelessWidget {
-  const Resultcard({super.key});
+  const Resultcard(
+      {super.key, required this.documentSnapshot, required this.color});
 
+  final int color;
+  final Map<String, dynamic> documentSnapshot;
   @override
   Widget build(BuildContext context) {
+    getColor(color);
     return Container(
-      height: 100,
+      height: 140,
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.blue.shade50, borderRadius: BorderRadius.circular(10)),
+          color: containerclr, borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-             children: [
-          Container(
-            width: 85,
-            height: double.infinity,
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 252, 252, 252),
-                borderRadius: BorderRadius.circular(10)),
-                child: Image.asset('assets/images/2.png'),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  'Product Design v1.0',
-                  style: TextStyle(fontSize: 20),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.network(documentSnapshot['imgurl'],
+                        fit: BoxFit.fill),
+                  ),
                 ),
-                Text('16 lessons')
-              ],
-            ),
-          ),
-          IconButton(
-            icon:
-                Icon(Icons.play_circle, size: 50, color: Colors.blue.shade600),
-            onPressed: () {},
-            padding: EdgeInsets.zero,
-          )
-        ]),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 1,
+                  ),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      documentSnapshot['title'],
+                      style: const TextStyle(
+                          fontSize: 18, fontFamily: 'PoppinsMedium'),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '${documentSnapshot['lectures']} lectures',
+                        style: const TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        width: 80,
+                      ),
+                       Text(
+                        '₹ ${documentSnapshot['price']}',
+                        style:
+                            const TextStyle(fontSize: 22, fontFamily: 'PoppinsBold'),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ]),
       ),
     );
   }

@@ -6,15 +6,19 @@ import 'package:teach_it/presentation/screens/home/add%20course/add_course.dart'
 import 'package:teach_it/presentation/screens/home/add%20course/add_lectures.dart';
 
 class Yourcourses extends StatelessWidget {
-  Yourcourses({super.key});
+  
+  Yourcourses({
+    super.key,
+  });
   final CollectionReference dbRef =
       FirebaseFirestore.instance.collection('teachers');
   final User? user = FirebaseAuth.instance.currentUser;
+  final CollectionReference newRef =
+      FirebaseFirestore.instance.collection('courses');
+
   @override
   Widget build(BuildContext context) {
     dbRef.doc(user!.uid).set({'name': user!.displayName});
-    final CollectionReference newRef =
-        dbRef.doc(user!.uid).collection('courses');
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -34,14 +38,13 @@ class Yourcourses extends StatelessWidget {
         ],
       ),
       body: StreamBuilder(
-        stream: newRef.snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-          if (streamSnapshot.hasData) {
+        stream: getcourses,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
             return ListView.builder(
-              itemCount: streamSnapshot.data!.docs.length,
+              itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
-                final DocumentSnapshot documentSnapshot =
-                    streamSnapshot.data!.docs[index];
+                final Map<String,dynamic> documentSnapshot = snapshot.data[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -57,6 +60,7 @@ class Yourcourses extends StatelessWidget {
                       margin: const EdgeInsets.all(10),
                       child: ListTile(
                         title: Text(documentSnapshot['title']),
+                        trailing: Text(documentSnapshot['lectures']),
                       )),
                 );
               },
@@ -77,4 +81,14 @@ class Yourcourses extends StatelessWidget {
       ),
     );
   }
+
+  Stream getcourses = (() async* {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final newsnap = await FirebaseFirestore.instance
+        .collection('courses')
+        .where('id', isEqualTo: user!.uid)
+        .get();
+    List courselist = newsnap.docs.map((e) => e.data()).toList();
+    yield courselist;
+  })();
 }

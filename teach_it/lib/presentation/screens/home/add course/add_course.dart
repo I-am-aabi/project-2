@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:teach_it/presentation/screens/home/widgets/choose_image.dart';
 
 class Addcourse extends StatefulWidget {
   const Addcourse({
@@ -7,7 +10,6 @@ class Addcourse extends StatefulWidget {
     required this.databaseRef,
   });
   final CollectionReference databaseRef;
-
   @override
   State<Addcourse> createState() => _AddcourseState();
 }
@@ -35,6 +37,8 @@ class _AddcourseState extends State<Addcourse> {
   final discriptioncontroller = TextEditingController();
 
   final pricecontroller = TextEditingController();
+
+  String? imageurl;
 
   @override
   Widget build(BuildContext context) {
@@ -93,16 +97,17 @@ class _AddcourseState extends State<Addcourse> {
                   children: [
                     const Padding(
                       padding: EdgeInsets.only(left: 3),
-                      child: Text('Category',
-                      style: TextStyle(
-                        fontSize: 16
-                      ),),
+                      child: Text(
+                        'Category',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                     DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                           value: dropdownvalue,
                           items: categories.map((String item) {
-                            return DropdownMenuItem(value: item, child: Text(item));
+                            return DropdownMenuItem(
+                                value: item, child: Text(item));
                           }).toList(),
                           onChanged: (String? newValue) {
                             setState(() {
@@ -114,6 +119,28 @@ class _AddcourseState extends State<Addcourse> {
                 ),
               ),
             ),
+            GestureDetector(
+              onTap: () {
+                setState(() async {
+                  imageurl = await imageChooser();
+                });
+              },
+              child: Container(
+                height: 200,
+                decoration: BoxDecoration(
+                    color: Colors.blue.shade50,
+                    borderRadius: BorderRadius.circular(10)),
+                child: imageurl == null
+                    ? const Center(
+                        child: Text(
+                          'Tap to add Thumbnail',
+                          style: TextStyle(fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : Image.network(imageurl!),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Container(
@@ -123,7 +150,7 @@ class _AddcourseState extends State<Addcourse> {
                   child: TextField(
                     controller: discriptioncontroller,
                     maxLines: 20,
-                    maxLength: 500,
+                    maxLength: 1200,
                     decoration: const InputDecoration(
                         hintText: 'Discription',
                         border: InputBorder.none,
@@ -135,13 +162,17 @@ class _AddcourseState extends State<Addcourse> {
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          final user = FirebaseAuth.instance.currentUser;
           widget.databaseRef.doc(titlecontroller.text.toString()).set({
+            'id': user!.uid,
+            'username': user.displayName,
             'title': titlecontroller.text.toString(),
             'discription': discriptioncontroller.text.toString(),
             'links': [],
             'discriptions': [],
             'price': pricecontroller.text.toString(),
-            'category' : dropdownvalue
+            'category': dropdownvalue,
+            'imgurl' : imageurl
           });
           titlecontroller.clear();
           discriptioncontroller.clear();
