@@ -11,6 +11,7 @@ class Coursepro1 extends StatelessWidget {
         height: 180,
         width: 160,
         decoration: BoxDecoration(
+           boxShadow: [BoxShadow(blurRadius: 1,color: Colors.green.withOpacity(0.7)),],
             color: Colors.green.shade50,
             borderRadius: BorderRadius.circular(20)),
         child: Padding(
@@ -59,7 +60,7 @@ class Coursepro1 extends StatelessWidget {
                   ),
                   IconButton(
                       onPressed: (() {
-                        onMycourse(context);
+                        // onMycourse(context);
                       }),
                       icon: const Icon(
                         Icons.play_circle,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_it/presentation/screens/home/product%20design/product_desing.dart';
+import 'package:learn_it/presentation/screens/home/product%20design/course_preview.dart';
 
-onMycourse(context) {
+onMycourse(context , documentsnapshot) {
   Navigator.push(
-      context, MaterialPageRoute(builder: ((context) => const Productdesign())));
+      context, MaterialPageRoute(builder: ((context) =>  Coursepreview(document: documentsnapshot,))));
 }

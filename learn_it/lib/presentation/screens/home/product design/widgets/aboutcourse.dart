@@ -1,29 +1,39 @@
 import 'package:flutter/material.dart';
 
 class Aboutcourse extends StatelessWidget {
-  const Aboutcourse({super.key});
-
+   Aboutcourse(
+      {super.key, required this.lectures, required this.discription});
+  final String lectures;
+  final String discription;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Text(
-          '6h 14min - 24 lesson',
-          style: TextStyle(color: Colors.black38, fontSize: 16),
+          ' $lectures lectures',
+          style: const TextStyle(color: Colors.black38, fontSize: 16),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
-        Text('About this course',
+        const Text(' About this course',
             style: TextStyle(fontSize: 20, fontFamily: 'PoppinsMedium')),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
-        Text(
-          'This Specialization is designed for aspiring and active product leaders seeking to pursue careers in product management, product design, and related roles. Through five practical courses, you will learn the fundamentals for designing and managing products. Upon completion, you will have created your own personal toolbox of knowledge and techniques for approaching and solving real-world problems that product leaders face.',
-          style: TextStyle(color: Colors.black45,
-          fontFamily: 'Poppinsthin'
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(20)
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              discription,
+              style:
+                  const TextStyle(color: Colors.black87, fontFamily: 'Poppinsthin'),
+            ),
           ),
         )
 
