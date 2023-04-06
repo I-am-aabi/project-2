@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/core/colors.dart';
-import 'package:learn_it/presentation/screens/home/my%20course/functions/navigations/productcourse.dart';
+import 'package:learn_it/presentation/screens/home/my%20course/functions/navigations/tomycourse.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Coursecard extends StatelessWidget {
+class Coursecard extends StatefulWidget {
   const Coursecard(
-      {super.key, required this.documnectsnapshot, required this.color});
-  final Map<String, dynamic> documnectsnapshot;
+      {super.key,
+      required this.documentsnapshot,
+      required this.color,
+      required this.videoid});
+  final Map<String, dynamic> documentsnapshot;
 
   final int color;
+  final String videoid;
+
+  @override
+  State<Coursecard> createState() => _CoursecardState();
+}
+
+class _CoursecardState extends State<Coursecard> {
+  List<String> watchedVideos = [];
+  int watched = 1;
+  @override
+  void initState() {
+    super.initState();
+    _loadWatchedVideos();
+  }
+
+  void _loadWatchedVideos() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      watchedVideos =
+          prefs.getStringList('watchedVideos${widget.videoid}') ?? [];
+
+          
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    getColor(color);
+    getColor(widget.color);
     return GestureDetector(
+      onTap: () => onMycourse(context, widget.documentsnapshot),
       child: Container(
         height: 210,
         width: 160,
@@ -29,7 +59,7 @@ class Coursecard extends StatelessWidget {
                 height: 80,
                 width: 110,
                 child: Text(
-                  documnectsnapshot['title'],
+                  widget.documentsnapshot['title'],
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),
@@ -42,7 +72,7 @@ class Coursecard extends StatelessWidget {
                 child: LinearProgressIndicator(
                   color: catgtextclr,
                   backgroundColor: Colors.white,
-                  value: 0.583,
+                  value: watchedVideos.length/widget.documentsnapshot['links'].length,
                   minHeight: 6,
                 ),
               ),
@@ -50,16 +80,18 @@ class Coursecard extends StatelessWidget {
                 height: 10,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         'completed',
-                        style: TextStyle(fontSize: 12),
+                        style: TextStyle(fontSize: 14),
                       ),
                       Text(
-                        '14/${documnectsnapshot['lectures']}',
+                        '${watchedVideos.length.toString()}/${widget.documentsnapshot['lectures']}',
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )

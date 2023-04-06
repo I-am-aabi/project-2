@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/functions/getmycourses.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/widgets/course_progress.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
@@ -47,10 +48,13 @@ class _CoursePageState extends State<CoursePage> {
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const SizedBox(
-                                height: 150,
-                                width: 150,
-                                child: CircularProgressIndicator());
+                            return  const SizedBox(
+                                height: 200,
+                                width: double.infinity,
+                                child: SpinKitCircle(
+                                  size: 100,
+                                 color: Colors.blue,
+                                ));
                           } else if (snapshot.connectionState ==
                                   ConnectionState.done ||
                               snapshot.connectionState ==
@@ -71,7 +75,8 @@ class _CoursePageState extends State<CoursePage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Coursecard(
-                                            documnectsnapshot:
+                                          videoid: documentSnapshot1['videoid'],
+                                            documentsnapshot:
                                                 documentSnapshot1,
                                             color: index + index),
                                         documentSnapshot2 == null
@@ -80,7 +85,8 @@ class _CoursePageState extends State<CoursePage> {
                                                 width: 180,
                                               )
                                             : Coursecard(
-                                                documnectsnapshot:
+                                              videoid: documentSnapshot2['videoid'],
+                                                documentsnapshot:
                                                     documentSnapshot2,
                                                 color: index + index + 1),
                                       ],

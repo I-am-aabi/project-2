@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class Buyfltbtn extends StatelessWidget {
-  const Buyfltbtn({super.key});
-
+  const Buyfltbtn({super.key, required this.visible});
+  final bool visible;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +24,10 @@ class Buyfltbtn extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(right: 15.0, left: 15),
-                child: SizedBox(
+                child:
+                
+                visible ?
+                 SizedBox(
                   width: 160,
                   height: 55,
                   child: TextButton(
@@ -43,7 +43,23 @@ class Buyfltbtn extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                ),
+                ):                 SizedBox(
+                  width: 160,
+                  height: 55,
+                  child: TextButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                    ),
+                    child: const Text(
+                      'play now',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
               ),
               FloatingActionButton(
                 onPressed: () {

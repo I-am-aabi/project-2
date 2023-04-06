@@ -57,11 +57,11 @@ class Coursepreview extends StatelessWidget {
                       },
                       itemCount: document['links'].length),
               const SizedBox(
-                height: 100,
+                height: 150,
               )
             ],
           ),
         )),
-        floatingActionButton: const Buyfltbtn());
+        floatingActionButton: const Buyfltbtn(visible: true,));
   }
 }

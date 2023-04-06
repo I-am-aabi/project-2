@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:learn_it/presentation/screens/home/course%20player%20locked/courseplay.dart';
-import 'package:learn_it/presentation/screens/home/course%20preview/widgets/buycourse.dart';
+import 'package:learn_it/presentation/screens/home/mycourses%20course%20player/mycourseplayer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class Lesson extends StatelessWidget {
-  const Lesson(
-      {super.key,
-      required this.description,
-      required this.url,
-      required this.document, required this.locked});
-  
+class MyLesson extends StatelessWidget {
+  const MyLesson({
+    super.key,
+    required this.description,
+    required this.url,
+    required this.document,
+    required this.player, required this.courseid,
+  });
+
   final String description;
+  final String courseid;
   final String url;
-  final bool locked;
+  final bool player;
   final Map<String, dynamic> document;
   @override
   Widget build(BuildContext context) {
@@ -58,18 +60,27 @@ class Lesson extends StatelessWidget {
               ),
               IconButton(
                 icon: Icon(
-                  locked == true ? Icons.lock_rounded : Icons.play_circle,
-                  size: locked == true ? 35 : 45,
+                  Icons.play_circle,
+                  size: 45,
                   color: Colors.blue.shade500,
                 ),
                 onPressed: () {
-                  locked == true
-                      ? buycoursemsg(context)
+                  player == true
+                      ? Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyCourseplay(
+                              courseid: courseid,
+                              id: vidioId,
+                              heading: description,
+                              document: document,
+                            ),
+                          ))
                       : Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Courseplay(
-                              locked: locked,
+                            builder: (context) => MyCourseplay(
+                              courseid: courseid,
                               id: vidioId,
                               heading: description,
                               document: document,

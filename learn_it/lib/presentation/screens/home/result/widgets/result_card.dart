@@ -12,7 +12,7 @@ class Resultcard extends StatelessWidget {
   Widget build(BuildContext context) {
     getColor(color);
     return GestureDetector(
-      onTap: () => onMycourse(context, documentSnapshot),
+      onTap: () => oncourse(context, documentSnapshot,true),
       child: Container(
         height: 140,
         width: double.infinity,

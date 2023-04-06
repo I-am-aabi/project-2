@@ -9,11 +9,13 @@ class Courseplay extends StatefulWidget {
       {super.key,
       required this.id,
       required this.heading,
-      required this.document, required this.locked});
+      required this.document,
+      required this.locked,});
   final String? id;
   final String heading;
   final Map<String, dynamic> document;
   final bool locked;
+  
 
   @override
   State<Courseplay> createState() => _CourseplayState();
@@ -58,9 +60,8 @@ class _CourseplayState extends State<Courseplay> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Lesson(
-                          locked: true,
+                            locked: !widget.locked,
                             document: widget.document,
-                           
                             description: widget.document['discriptions']
                                 [index + 1],
                             url: widget.document['links'][index + 1]);
@@ -78,7 +79,7 @@ class _CourseplayState extends State<Courseplay> {
               ),
             ),
           ),
-          floatingActionButton: const Buyfltbtn(),
+          floatingActionButton: const Buyfltbtn(visible: true),
         );
       } else {
         return YoutubePlayer(
