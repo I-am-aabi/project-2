@@ -11,9 +11,14 @@ signUp(context) {
       .createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim())
-      .then((value) => Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Navbar())));
-  loginDispose();
+      .then((value) {
+    User? user = FirebaseAuth.instance.currentUser;
+    user!.updateDisplayName(confpassController.text.toString());
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const Navbar()));
+        loginDispose();
+  });
+  
 }
 
 loginDispose() {

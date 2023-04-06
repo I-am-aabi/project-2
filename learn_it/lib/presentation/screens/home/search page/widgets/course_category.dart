@@ -27,16 +27,6 @@ class Categoryimg extends StatelessWidget {
         },
         child: Column(
           children: [
-            Text(
-              subject,
-              style: TextStyle(
-                  fontSize: 18,
-                  color: catgtextclr,
-                  fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 5,
-            ),
             Container(
               height: 140,
               width: 160,
@@ -60,6 +50,16 @@ class Categoryimg extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            Text(
+              subject,
+              style: TextStyle(
+                  fontSize: 18,
+                  color: catgtextclr,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ));

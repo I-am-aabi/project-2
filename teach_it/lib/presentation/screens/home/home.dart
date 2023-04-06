@@ -60,7 +60,7 @@ class Yourcourses extends StatelessWidget {
                       margin: const EdgeInsets.all(10),
                       child: ListTile(
                         title: Text(documentSnapshot['title']),
-                        trailing: Text(documentSnapshot['lectures']),
+                        // trailing: Text(documentSnapshot['lectures']),
                       )),
                 );
               },

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -46,7 +47,9 @@ class Buyfltbtn extends StatelessWidget {
               ),
               FloatingActionButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  SystemChrome.setPreferredOrientations(
+                          [DeviceOrientation.portraitUp])
+                      .then((value) => Navigator.pop(context));
                 },
                 child: const Icon(Icons.arrow_back),
               )

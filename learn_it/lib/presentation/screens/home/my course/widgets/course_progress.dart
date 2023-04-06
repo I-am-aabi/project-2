@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:learn_it/core/colors.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/functions/navigations/productcourse.dart';
 
-class Coursepro1 extends StatelessWidget {
-  const Coursepro1({super.key});
+class Coursecard extends StatelessWidget {
+  const Coursecard(
+      {super.key, required this.documnectsnapshot, required this.color});
+  final Map<String, dynamic> documnectsnapshot;
 
+  final int color;
   @override
   Widget build(BuildContext context) {
+    getColor(color);
     return GestureDetector(
       child: Container(
-        height: 180,
+        height: 210,
         width: 160,
         decoration: BoxDecoration(
-           boxShadow: [BoxShadow(blurRadius: 1,color: Colors.green.withOpacity(0.7)),],
-            color: Colors.green.shade50,
-            borderRadius: BorderRadius.circular(20)),
+            color: containerclr, borderRadius: BorderRadius.circular(20)),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -22,22 +25,26 @@ class Coursepro1 extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              const SizedBox(
-                height: 50,
-                width: 100,
+              SizedBox(
+                height: 80,
+                width: 110,
                 child: Text(
-                  'Product Design v1.0',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  documnectsnapshot['title'],
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.w600),
                 ),
               ),
               const SizedBox(
                 height: 15,
               ),
-              LinearProgressIndicator(
-                color: Colors.green.shade400,
-                backgroundColor: Colors.white,
-                value: 0.583,
-                minHeight: 6,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: LinearProgressIndicator(
+                  color: catgtextclr,
+                  backgroundColor: Colors.white,
+                  value: 0.583,
+                  minHeight: 6,
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -46,14 +53,14 @@ class Coursepro1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Column(
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         'completed',
                         style: TextStyle(fontSize: 12),
                       ),
                       Text(
-                        '14/24',
-                        style: TextStyle(
+                        '14/${documnectsnapshot['lectures']}',
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       )
                     ],
@@ -62,9 +69,9 @@ class Coursepro1 extends StatelessWidget {
                       onPressed: (() {
                         // onMycourse(context);
                       }),
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.play_circle,
-                        color: Colors.green,
+                        color: catgtextclr,
                         size: 50,
                       ))
                 ],
