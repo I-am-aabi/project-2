@@ -16,7 +16,7 @@ class Watchedcourses extends StatelessWidget {
       children: [
         const Text(
           'watch again',
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 20,fontFamily: 'PoppinsMedium'),
         ),
         const SizedBox(
           height: 10,

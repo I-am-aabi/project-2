@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/functions/getmycourses.dart';
@@ -13,18 +12,42 @@ class CoursePage extends StatefulWidget {
   State<CoursePage> createState() => _CoursePageState();
 }
 
-class _CoursePageState extends State<CoursePage> {
+class _CoursePageState extends State<CoursePage> with TickerProviderStateMixin {
   StreamSubscription<List<dynamic>>? _subscription;
-
+  late AnimationController _animationControllerC1;
+  late Animation<Offset> _animationC1;
+  late AnimationController _animationControllerC2;
+  late Animation<Offset> _animationC2;
   @override
   void initState() {
     _subscription = getmycourses().listen((courses) {});
+    _animationControllerC1 = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _animationC1 = Tween<Offset>(
+      begin: const Offset(-1.0, 0.0),
+      end: Offset.zero,
+    ).animate(_animationControllerC1);
+    _animationControllerC1.forward();
+
+    _animationControllerC2 = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _animationC2 = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(_animationControllerC2);
+    _animationControllerC2.forward();
     super.initState();
   }
 
   @override
   void dispose() {
     _subscription?.cancel();
+    _animationControllerC1.dispose();
+    _animationControllerC2.dispose();
     super.dispose();
   }
 
@@ -48,12 +71,12 @@ class _CoursePageState extends State<CoursePage> {
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return  const SizedBox(
+                            return const SizedBox(
                                 height: 200,
                                 width: double.infinity,
                                 child: SpinKitCircle(
                                   size: 100,
-                                 color: Colors.blue,
+                                  color: Colors.blue,
                                 ));
                           } else if (snapshot.connectionState ==
                                   ConnectionState.done ||
@@ -74,21 +97,29 @@ class _CoursePageState extends State<CoursePage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Coursecard(
-                                          videoid: documentSnapshot1['videoid'],
-                                            documentsnapshot:
-                                                documentSnapshot1,
-                                            color: index + index),
+                                        SlideTransition(
+                                          position: _animationC1,
+                                          child: Coursecard(
+                                              videoid:
+                                                  documentSnapshot1['videoid'],
+                                              documentsnapshot:
+                                                  documentSnapshot1,
+                                              color: index + index),
+                                        ),
                                         documentSnapshot2 == null
                                             ? const SizedBox(
                                                 height: 180,
                                                 width: 180,
                                               )
-                                            : Coursecard(
-                                              videoid: documentSnapshot2['videoid'],
-                                                documentsnapshot:
-                                                    documentSnapshot2,
-                                                color: index + index + 1),
+                                            : SlideTransition(
+                                                position: _animationC2,
+                                                child: Coursecard(
+                                                    videoid: documentSnapshot2[
+                                                        'videoid'],
+                                                    documentsnapshot:
+                                                        documentSnapshot2,
+                                                    color: index + index + 1),
+                                              ),
                                       ],
                                     );
                                   },
@@ -99,7 +130,7 @@ class _CoursePageState extends State<CoursePage> {
                                   },
                                   itemCount: snapshot.data.length ~/ 2);
                             }
-                          } else {}
+                          } 
                           return const SizedBox(
                               height: 200, width: 200, child: Text('error'));
                         }),

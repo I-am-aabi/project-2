@@ -4,9 +4,14 @@ import 'package:learn_it/presentation/screens/home/home%20page/widgets/offer.dar
 import 'package:learn_it/presentation/screens/home/home%20page/widgets/username.dart';
 import 'package:learn_it/presentation/screens/home/home%20page/widgets/watchedcourse.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
