@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/core/colors.dart';
+import 'package:learn_it/presentation/screens/home/profile/widgets/favoritebtn.dart';
 import 'package:learn_it/presentation/screens/home/profile/widgets/profile_pic.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 import 'package:learn_it/presentation/screens/home/profile/widgets/textbtn.dart';
@@ -24,7 +25,7 @@ class ProfilePage extends StatelessWidget {
             SizedBox(height: 20,),
             Profilepic(),
             SizedBox(height: 15,),
-            Textbtn(text: 'Favorites'),
+            Favbtn(),
             SizedBox(height: 10,),
              Textbtn(text: 'Edit account'),
             SizedBox(height: 10,),

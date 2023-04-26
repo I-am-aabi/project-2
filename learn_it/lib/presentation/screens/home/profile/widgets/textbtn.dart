@@ -11,7 +11,7 @@ class Textbtn extends StatelessWidget {
     return GestureDetector(
         onTap: () async {
           await FirebaseAuth.instance.signOut();
-          Navigator.push(
+          Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const StartingPage(),

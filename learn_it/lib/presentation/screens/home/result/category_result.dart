@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/home/result/widgets/noresult.dart';
 import 'package:learn_it/presentation/screens/home/result/widgets/result_card.dart';
-import 'package:learn_it/presentation/screens/home/search%20page/functions/search_category.dart';
+import 'package:learn_it/presentation/screens/home/explore%20page/functions/search_category.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 
 class Catresult extends StatelessWidget {

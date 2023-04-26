@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/core/colors.dart';
 import 'package:learn_it/presentation/screens/home/result/category_result.dart';
-import 'package:learn_it/presentation/screens/home/search%20page/functions/search_category.dart';
+import 'package:learn_it/presentation/screens/home/explore%20page/functions/search_category.dart';
 
 class Categoryimg extends StatelessWidget {
   const Categoryimg(

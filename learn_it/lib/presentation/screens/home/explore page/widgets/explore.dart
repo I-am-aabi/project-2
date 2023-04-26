@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_it/presentation/screens/home/search%20page/search.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 
 class Explore extends StatelessWidget {
@@ -9,8 +10,17 @@ class Explore extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        
         const Heading(heading: 'Explore courses'),
-        IconButton(onPressed: (() {}), icon: const Icon(Icons.search_rounded))
+        IconButton(
+            onPressed: (() {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SearchPage(),
+                  ));
+            }),
+            icon: const Icon(Icons.search_rounded))
       ],
     );
   }

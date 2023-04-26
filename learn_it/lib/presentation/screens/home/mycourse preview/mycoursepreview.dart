@@ -106,8 +106,9 @@ class _MyCoursepreviewState extends State<MyCoursepreview> {
             ],
           ),
         )),
-        floatingActionButton: const Buyfltbtn(
+        floatingActionButton:  Buyfltbtn(
           visible: false,
+          videoid: widget.document['videoid'],price: widget.document['price'],title: widget.document['title']
         ));
   }
 }

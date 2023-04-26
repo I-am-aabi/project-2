@@ -1,22 +1,30 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Offercourse extends StatelessWidget {
-  const Offercourse({super.key});
+  Offercourse({super.key});
+  List<String> images = [
+    'assets/images/off1.png',
+    'assets/images/off2.png',
+    'assets/images/off3.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Fluttertoast.showToast(msg: 'hello world');
-      },
-      child: Container(
-        height: 200,
-        width: 320,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.white),
-        child: Image.asset('assets/images/offer.jpg'),
-      ),
+    return Padding(
+      padding: const EdgeInsets.only(left:8.0,right: 8),
+      child: CarouselSlider.builder(
+          itemCount: images.length,
+          itemBuilder: (context, index, realIndex) {
+            return ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(images[index],fit: BoxFit.contain,));
+          },
+          options: CarouselOptions(
+            height: 220,
+            autoPlay: true
+          )),
     );
   }
 }

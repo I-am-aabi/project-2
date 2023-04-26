@@ -14,15 +14,15 @@ class Username extends StatelessWidget {
           children:  [
             const Text(
               'Welcome',
-              style: TextStyle(color: Colors.black26, fontSize: 20),
+              style: TextStyle(color: Colors.black26, fontSize: 17,fontFamily: 'PoppinsMedium'),
             ),
             Text(
               username!,
-              style: const TextStyle(fontSize: 20),
+              style: const TextStyle(fontSize: 17,fontFamily: 'PoppinsMedium'),
             )
           ],
         ),
-        Icon(Icons.account_circle_rounded,color: Colors.blue.shade300,size: 50,)
+        Icon(Icons.account_circle_rounded,color: Colors.blue.shade300,size: 45,)
       ],
     );
   }

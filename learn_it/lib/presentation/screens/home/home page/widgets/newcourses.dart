@@ -28,7 +28,7 @@ class _NewcoursesState extends State<Newcourses> {
   @override
   Widget build(BuildContext context) {
     Container mycontainer = Container(
-      height: 180,
+      height: 220,
       width: 240,
       decoration: BoxDecoration(
           color: Colors.blue.shade50, borderRadius: BorderRadius.circular(20)),
@@ -56,7 +56,7 @@ class _NewcoursesState extends State<Newcourses> {
                   snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
                   return SizedBox(
-                    height: 180,
+                    height: 220,
                     width: double.infinity,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
@@ -67,7 +67,7 @@ class _NewcoursesState extends State<Newcourses> {
                             img: course['imgurl'], title: course['title']);
                       },
                       separatorBuilder: (context, index) => const SizedBox(
-                        width: 10,
+                        width: 15,
                       ),
                       itemCount: 3,
                     ),
@@ -83,7 +83,7 @@ class _NewcoursesState extends State<Newcourses> {
                     return mycontainer;
                   },
                   separatorBuilder: (context, index) => const SizedBox(
-                    width: 10,
+                    width: 15,
                   ),
                   itemCount: 3,
                 ),
@@ -101,8 +101,8 @@ class Newcoursecard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
-      width: 240,
+      height: 220,
+      width: 200,
       decoration: BoxDecoration(
           color: Colors.blue.shade50, borderRadius: BorderRadius.circular(20)),
       child: Padding(
@@ -114,12 +114,16 @@ class Newcoursecard extends StatelessWidget {
                 height: 120,
                 width: double.infinity,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(20),
                     child: Image.network(
                       img,
                       fit: BoxFit.fill,
                     ))),
-                Text(title,style: const TextStyle(fontSize: 14,fontFamily: 'Poppinsthin'),)
+            Text(
+              title,
+              style: const TextStyle(fontSize: 14, fontFamily: 'Poppinsthin'),
+              textAlign: TextAlign.center,
+            )
           ],
         ),
       ),

@@ -56,30 +56,30 @@ class _CourseplayState extends State<Courseplay> {
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Lesson(
-                            locked: !widget.locked,
-                            document: widget.document,
-                            description: widget.document['discriptions']
-                                [index + 1],
-                            url: widget.document['links'][index + 1]);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 15,
-                        );
-                      },
-                      itemCount: widget.document['links'].length - 1),
-                  const SizedBox(
-                    height: 100,
-                  )
+                  Expanded(
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Lesson(
+                              locked: !widget.locked,
+                              document: widget.document,
+                              description: widget.document['discriptions']
+                                  [index + 1],
+                              url: widget.document['links'][index + 1]);
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 15,
+                          );
+                        },
+                        itemCount: widget.document['links'].length - 1),
+                  ),
+                 
                 ],
               ),
             ),
           ),
-          floatingActionButton: const Buyfltbtn(visible: true),
+          floatingActionButton:  Buyfltbtn(visible: true,videoid: widget.document['videoid'],price: widget.document['price'],title: widget.document['title']),
         );
       } else {
         return YoutubePlayer(

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/functions/getmycourses.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/widgets/course_progress.dart';
+import 'package:learn_it/presentation/screens/home/my%20course/widgets/nocourses.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 
 class CoursePage extends StatefulWidget {
@@ -84,7 +85,9 @@ class _CoursePageState extends State<CoursePage> with TickerProviderStateMixin {
                                   ConnectionState.active) {
                             if (snapshot.hasError) {}
                             if (snapshot.hasData) {
-                              return ListView.separated(
+                              return
+                              snapshot.data.isEmpty ? const Nocourses():
+                               ListView.separated(
                                   itemBuilder: (context, index) {
                                     final documentSnapshot1 =
                                         snapshot.data[index + index][0];

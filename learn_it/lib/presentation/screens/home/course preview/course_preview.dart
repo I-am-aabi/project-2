@@ -5,11 +5,50 @@ import 'package:learn_it/presentation/screens/home/course%20preview/widgets/floa
 import 'package:learn_it/presentation/screens/home/course%20preview/widgets/lesson.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 
-class Coursepreview extends StatelessWidget {
+class Coursepreview extends StatefulWidget {
   const Coursepreview(
       {super.key, required this.document, required this.locked});
   final Map<String, dynamic> document;
   final bool locked;
+
+  @override
+  State<Coursepreview> createState() => _CoursepreviewState();
+}
+
+class _CoursepreviewState extends State<Coursepreview> {
+
+   final ScrollController _innerScrollController = ScrollController();
+  final ScrollController _outerScrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _innerScrollController.addListener(_scrollListener);
+  }
+
+  @override
+  void dispose() {
+    _innerScrollController.dispose();
+    _outerScrollController.dispose();
+
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_innerScrollController.position.atEdge) {
+      if (_innerScrollController.position.pixels == 0) {
+        // Reached the top
+      } else {
+        // Reached the bottom
+        _outerScrollController.animateTo(
+          _outerScrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.easeOut,
+        );
+      }
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,18 +56,19 @@ class Coursepreview extends StatelessWidget {
             child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: ListView(
+            controller: _innerScrollController,
             children: [
-              Courseimg(url: document['imgurl']),
+              Courseimg(url: widget.document['imgurl']),
               Padding(
                 padding: const EdgeInsets.only(left: 3.0, top: 5),
-                child: Heading(heading: document['title']),
+                child: Heading(heading: widget.document['title']),
               ),
               const SizedBox(
                 height: 5,
               ),
               Aboutcourse(
-                  discription: document['discription'],
-                  lectures: document['lectures']),
+                  discription: widget.document['discription'],
+                  lectures: widget.document['lectures']),
               const SizedBox(
                 height: 20,
               ),
@@ -37,31 +77,32 @@ class Coursepreview extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              document['links'].length == 0
+              widget.document['links'].length == 0
                   ? Image.asset('assets/images/nolectures.png')
                   : ListView.separated(
+                    controller: _outerScrollController,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Lesson(
-                            locked: locked == true
+                            locked: widget.locked == true
                                 ? (index == 0 ? false : true)
                                 : false,
-                            document: document,
-                            description: document['discriptions'][index],
-                            url: document['links'][index]);
+                            document: widget.document,
+                            description: widget.document['discriptions'][index],
+                            url: widget.document['links'][index]);
                       },
                       separatorBuilder: (context, index) {
                         return const SizedBox(
                           height: 15,
                         );
                       },
-                      itemCount: document['links'].length),
+                      itemCount: widget.document['links'].length),
               const SizedBox(
                 height: 150,
               )
             ],
           ),
         )),
-        floatingActionButton: const Buyfltbtn(visible: true,));
+        floatingActionButton:  Buyfltbtn(visible: true,videoid: widget.document['videoid'],price: widget.document['price'],title: widget.document['title'],));
   }
 }

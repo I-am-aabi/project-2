@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:learn_it/presentation/screens/home/search%20page/widgets/course_category.dart';
-import 'package:learn_it/presentation/screens/home/search%20page/widgets/explore.dart';
+import 'package:learn_it/presentation/screens/home/explore%20page/widgets/course_category.dart';
+import 'package:learn_it/presentation/screens/home/explore%20page/widgets/explore.dart';
 
-class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
+class ExplorePage extends StatelessWidget {
+  ExplorePage({super.key});
   List<String> subjects = [
     'Maths',
     'Science',

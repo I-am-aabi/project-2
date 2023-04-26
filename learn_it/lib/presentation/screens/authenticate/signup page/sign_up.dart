@@ -37,42 +37,42 @@ class Signuppage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    SizedBox(
+                  children:  [
+                    const SizedBox(
                       height: 30,
                     ),
-                    WelcomeText(
+                    const WelcomeText(
                         heading: 'Hi!', discription: 'Create a new account'),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Username(),
-                    SizedBox(
+                    const SizedBox(
                       height: 40,
                     ),
-                    Emailfield(),
-                    SizedBox(
+                    const Emailfield(),
+                    const SizedBox(
                       height: 40,
                     ),
-                    Passfield(),
-                    SizedBox(
+                    const Passfield(),
+                    const SizedBox(
                       height: 50,
                     ),
-                    Center(child: SignupContinuebtn()),
+                    const Center(child: SignupContinuebtn()),
                     // Forgotpass(),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Ortext(),
-                    SizedBox(
+                    const Ortext(),
+                    const SizedBox(
                       height: 20,
                     ),
-                    Loginwith(),
-                    SizedBox(
+                    const Loginwith(),
+                    const SizedBox(
                       height: 25,
                     ),
-                    Signintxtbtn(),
-                    SizedBox(
+                    const Signintxtbtn(),
+                    const SizedBox(
                       height: 20,
                     )
                   ],

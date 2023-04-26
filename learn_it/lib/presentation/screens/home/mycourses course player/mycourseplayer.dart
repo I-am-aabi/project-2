@@ -47,8 +47,7 @@ class _MyCourseplayState extends State<MyCourseplay> {
       watchedVideos.add(metaData.videoId);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setStringList('watchedVideos${widget.courseid}', watchedVideos);
-      print(
-       watchedVideos);
+      print(watchedVideos);
     }
   }
 
@@ -101,7 +100,11 @@ class _MyCourseplayState extends State<MyCourseplay> {
               ),
             ),
           ),
-          floatingActionButton: const Buyfltbtn(visible: false),
+          floatingActionButton: Buyfltbtn(
+              visible: false,
+              videoid: widget.document['videoid'],
+              price: widget.document['price'],
+              title: widget.document['title']),
         );
       } else {
         return YoutubePlayer(

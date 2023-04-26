@@ -44,6 +44,4 @@ class StartingPage extends StatelessWidget {
   }
 }
 
-_checkLogin(context) {
-  
-}
+

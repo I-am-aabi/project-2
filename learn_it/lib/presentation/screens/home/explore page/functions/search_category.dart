@@ -1,10 +1,8 @@
-import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 TextEditingController categorycontroller = TextEditingController();
 
-final streamController = StreamController<List<dynamic>>();
 
  categoryget () async {
    final newsnap = await FirebaseFirestore.instance

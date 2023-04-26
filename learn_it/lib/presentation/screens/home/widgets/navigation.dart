@@ -3,7 +3,7 @@ import 'package:learn_it/core/colors.dart';
 import 'package:learn_it/presentation/screens/home/home%20page/home.dart';
 import 'package:learn_it/presentation/screens/home/my%20course/my_course.dart';
 import 'package:learn_it/presentation/screens/home/profile/profile.dart';
-import 'package:learn_it/presentation/screens/home/search%20page/serach.dart';
+import 'package:learn_it/presentation/screens/home/explore%20page/explore.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 
 class Navbar extends StatefulWidget {
@@ -16,7 +16,7 @@ class Navbar extends StatefulWidget {
 final pageList = [
   const HomePage(),
   const CoursePage(),
-   SearchPage(),
+   ExplorePage(),
   const ProfilePage(),
 ];
 
