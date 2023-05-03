@@ -1,17 +1,21 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:learn_it/core/colors.dart';
 import 'package:learn_it/presentation/screens/home/payment/widgets/fields.dart';
-import 'package:learn_it/presentation/screens/home/payment/widgets/paybuttons.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
+import 'package:learn_it/presentation/screens/home/widgets/navigation.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class Paypage extends StatefulWidget {
-  const Paypage({super.key, required this.amount, required this.title});
+  const Paypage(
+      {super.key, required this.amount, required this.title, required this.id});
   final String amount;
   final String title;
+  final String id;
   @override
   State<Paypage> createState() => _PaypageState();
 }
@@ -68,17 +72,47 @@ class _PaypageState extends State<Paypage> {
     });
   }
 
-  void _handlePaymentSuccess(PaymentSuccessResponse response) {
-    // print('payment success: ');
+  void _handlePaymentSuccess(PaymentSuccessResponse response) async {
+    final user = FirebaseAuth.instance.currentUser;
+    final QuerySnapshot<Map<String, dynamic>> students = await FirebaseFirestore
+        .instance
+        .collection('students')
+        .where('uid', isEqualTo: user!.uid)
+        .limit(1)
+        .get();
+    final List student = students.docs.map((e) => e.data()).toList();
+    final List<dynamic> subscriptions = student[0]['subscriptions'];
+    final List<dynamic> fav = student[0]['favorites'];
+    subscriptions.add(widget.id);
+    FirebaseFirestore.instance
+        .collection('students')
+        .doc(user.displayName! + user.uid)
+        .update({
+      'subscriptions': subscriptions,
+      'name': user.displayName,
+      'uid': user.uid,
+      'favorites': fav
+    });
+    Fluttertoast.showToast(
+        msg: 'course added to subscription',
+        backgroundColor: const Color.fromARGB(255, 29, 212, 47));
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Navbar(),
+        ));
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
-    // print('payment failure: ');
+    Fluttertoast.showToast(
+        msg: 'some error occured in payment',
+        backgroundColor: const Color.fromARGB(255, 226, 21, 21));
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
     // print('payment some');
   }
+  addsubscription() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -96,13 +130,22 @@ class _PaypageState extends State<Paypage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Payinfo(title: widget.title,head: 'Name',),
+                Payinfo(
+                  title: widget.title,
+                  head: 'Name',
+                ),
                 const SizedBox(
                   height: 20,
                 ),
-                Payinfo(title: widget.amount,head: 'Price',),
+                Payinfo(
+                  title: '${widget.amount}₹',
+                  head: 'Price',
+                ),
                 const SizedBox(height: 20),
-                Payinfo(title: '${widget.amount}.00',head: 'Total',),
+                Payinfo(
+                  title: '${widget.amount}.00₹',
+                  head: 'Total',
+                ),
               ],
             ),
             Row(

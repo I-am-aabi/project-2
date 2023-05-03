@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/fogotpswd.dart';
-import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/loginwith.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/ortext.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/signin_continue.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/email_field.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/signuptxtbtn.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/welcome_text.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/password_field.dart';
+import 'package:learn_it/presentation/screens/authenticate/signup%20page/widgets/terms.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -36,7 +36,7 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children:  const [
                     SizedBox(height: 30,),
                     WelcomeText(heading: 'Welcome!',discription: 'Sign in to continue'),
                     SizedBox(
@@ -56,13 +56,14 @@ class LoginPage extends StatelessWidget {
                       height: 10,
                     ),
                     Ortext(),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Loginwith(),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    // Loginwith(),
                     SizedBox(height: 25,),
                     Signuptxtbtn(),
-                    SizedBox(height: 20,)
+                    SizedBox(height: 20,),
+                    TermsandConditions()
                   ],
                 ),
               ),

@@ -5,7 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:learn_it/presentation/screens/home/payment/payment_screen.dart';
 
 class Buyfltbtn extends StatefulWidget {
-  const Buyfltbtn({super.key, required this.visible, required this.videoid, required this.price, required this.title});
+  const Buyfltbtn(
+      {super.key,
+      required this.visible,
+      required this.videoid,
+      required this.price,
+      required this.title});
   final bool visible;
   final String videoid;
   final String price;
@@ -56,7 +61,10 @@ class _BuyfltbtnState extends State<Buyfltbtn> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>  Paypage(amount: widget.price, title: widget.title,),
+                                builder: (context) => Paypage(
+                                    amount: widget.price,
+                                    title: widget.title,
+                                    id: widget.videoid),
                               ));
                         },
                         style: ButtonStyle(
@@ -143,4 +151,5 @@ favoriteschange(videoid) async {
         .doc(user.displayName! + user.uid)
         .update({'favorites': favorites});
   }
+ 
 }

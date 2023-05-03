@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Stream<List<dynamic>> getmycourses () async* {
+Stream<List<dynamic>> getmycourses() async* {
   final user = FirebaseAuth.instance.currentUser;
   List<dynamic> results = [];
   final QuerySnapshot<Map<String, dynamic>> students = await FirebaseFirestore

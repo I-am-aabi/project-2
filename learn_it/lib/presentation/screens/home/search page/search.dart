@@ -19,7 +19,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     _subscription = searchget().listen((event) {});
-    List result = [];
+   
     super.initState();
   }
 

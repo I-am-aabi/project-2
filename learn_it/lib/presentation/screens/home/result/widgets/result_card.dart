@@ -34,7 +34,25 @@ class Resultcard extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.network(documentSnapshot['imgurl'],
-                          fit: BoxFit.fill),
+                          fit: BoxFit.fill,errorBuilder:
+                        (BuildContext context, Object exception, stackTrace) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.wifi_off,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              'Check your network connection',
+                              style: TextStyle(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
                     ),
                   ),
                 ),

@@ -23,6 +23,6 @@ Stream<List<dynamic>> getfavorites() async* {
     final List result = newsnap.docs.map((e) => e.data()).toList();
     results.add(result);
   }
-  print(results);
+  // print(results);
   yield results;
 }

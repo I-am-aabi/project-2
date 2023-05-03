@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 TextEditingController categorycontroller = TextEditingController();
 
 
- categoryget () async {
+Stream categoryget () async* {
    final newsnap = await FirebaseFirestore.instance
         .collection('courses')
         .where('category', isEqualTo: categorycontroller.text)
         .get();
     List courselist = newsnap.docs.map((e) => e.data()).toList();
-    return  courselist;
+    yield  courselist;
 }

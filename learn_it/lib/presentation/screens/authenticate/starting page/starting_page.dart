@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/authenticate/starting%20page/widgets/signin_signup.dart';
-import 'package:learn_it/presentation/screens/home/widgets/navigation.dart';
 
 class StartingPage extends StatelessWidget {
   const StartingPage({super.key});

@@ -10,7 +10,7 @@ class WelcomeText extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children:  [
         const SizedBox(
-          height: 40,
+          height: 20,
         ),
         Text(
           heading,

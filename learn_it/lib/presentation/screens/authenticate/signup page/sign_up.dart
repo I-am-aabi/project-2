@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/ortext.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/welcome_text.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/email_field.dart';
-import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/loginwith.dart';
 import 'package:learn_it/presentation/screens/authenticate/login%20page/widgets/password_field.dart';
 import 'package:learn_it/presentation/screens/authenticate/signup%20page/widgets/confpasss.dart';
 import 'package:learn_it/presentation/screens/authenticate/signup%20page/widgets/signintxtbtn.dart';
 import 'package:learn_it/presentation/screens/authenticate/signup%20page/widgets/signup_continue.dart';
+import 'package:learn_it/presentation/screens/authenticate/signup%20page/widgets/terms.dart';
 
 
 class Signuppage extends StatelessWidget {
@@ -33,7 +33,7 @@ class Signuppage extends StatelessWidget {
             ),
             SizedBox(
               child: Padding(
-                padding: const EdgeInsets.only(left: 30.0, right: 30),
+                padding: const EdgeInsets.only(left: 25.0, right: 25),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,17 +64,14 @@ class Signuppage extends StatelessWidget {
                       height: 10,
                     ),
                     const Ortext(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Loginwith(),
+                   
                     const SizedBox(
                       height: 25,
                     ),
                     const Signintxtbtn(),
                     const SizedBox(
                       height: 20,
-                    )
+                    ),const TermsandConditions()
                   ],
                 ),
               ),

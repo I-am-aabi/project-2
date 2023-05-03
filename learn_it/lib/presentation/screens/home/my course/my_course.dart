@@ -85,55 +85,60 @@ class _CoursePageState extends State<CoursePage> with TickerProviderStateMixin {
                                   ConnectionState.active) {
                             if (snapshot.hasError) {}
                             if (snapshot.hasData) {
-                              return
-                              snapshot.data.isEmpty ? const Nocourses():
-                               ListView.separated(
-                                  itemBuilder: (context, index) {
-                                    final documentSnapshot1 =
-                                        snapshot.data[index + index][0];
-                                    final documentSnapshot2 =
-                                        index + index + 1 < snapshot.data.length
+                              return snapshot.data.isEmpty
+                                  ? const Nocourses()
+                                  : ListView.separated(
+                                      itemBuilder: (context, index) {
+                                      
+                                        final documentSnapshot1 =
+                                            snapshot.data[index + index][0];
+                                        final documentSnapshot2 = index +
+                                                    index +
+                                                    1 <
+                                                snapshot.data.length
                                             ? snapshot.data[index + index + 1]
                                                 [0]
                                             : null;
-                                    return Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SlideTransition(
-                                          position: _animationC1,
-                                          child: Coursecard(
-                                              videoid:
-                                                  documentSnapshot1['videoid'],
-                                              documentsnapshot:
-                                                  documentSnapshot1,
-                                              color: index + index),
-                                        ),
-                                        documentSnapshot2 == null
-                                            ? const SizedBox(
-                                                height: 180,
-                                                width: 180,
-                                              )
-                                            : SlideTransition(
-                                                position: _animationC2,
-                                                child: Coursecard(
-                                                    videoid: documentSnapshot2[
-                                                        'videoid'],
-                                                    documentsnapshot:
-                                                        documentSnapshot2,
-                                                    color: index + index + 1),
-                                              ),
-                                      ],
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return const SizedBox(
-                                      height: 50,
-                                    );
-                                  },
-                                  itemCount: snapshot.data.length ~/ 2);
+                                        return Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SlideTransition(
+                                              position: _animationC1,
+                                              child: Coursecard(
+                                                  videoid: documentSnapshot1[
+                                                      'videoid'],
+                                                  documentsnapshot:
+                                                      documentSnapshot1,
+                                                  color: index + index),
+                                            ),
+                                            documentSnapshot2 == null
+                                                ? const SizedBox(
+                                                    height: 180,
+                                                    width: 180,
+                                                  )
+                                                : SlideTransition(
+                                                    position: _animationC2,
+                                                    child: Coursecard(
+                                                        videoid:
+                                                            documentSnapshot2[
+                                                                'videoid'],
+                                                        documentsnapshot:
+                                                            documentSnapshot2,
+                                                        color:
+                                                            index + index + 1),
+                                                  ),
+                                          ],
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          height: 50,
+                                        );
+                                      },
+                                      itemCount: snapshot.data.length% 2 ==1? snapshot.data.length ~/2+1 : snapshot.data.length ~/ 2);
                             }
-                          } 
+                          }
                           return const SizedBox(
                               height: 200, width: 200, child: Text('error'));
                         }),

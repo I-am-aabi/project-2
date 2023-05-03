@@ -18,11 +18,11 @@ class Categoryimg extends StatelessWidget {
     return GestureDetector(
         onTap: () async {
           categorycontroller.text = subject;
-          List<dynamic> courseList =await categoryget();
+          // List<dynamic> courseList =await categoryget();
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Catresult(courselist: courseList),
+                builder: (context) => Catresult(),
               ));
         },
         child: Column(
@@ -46,6 +46,7 @@ class Categoryimg extends StatelessWidget {
                     child: Image.asset(
                       path,
                       fit: BoxFit.cover,
+                      
                     ),
                   ),
                 ),

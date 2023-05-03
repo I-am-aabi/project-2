@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/authenticate/starting%20page/functions/Checklogin.dart';
-import 'package:learn_it/presentation/screens/authenticate/starting%20page/starting_page.dart';
 import 'package:learn_it/presentation/screens/getting%20started/landing_page/landing_page_1.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

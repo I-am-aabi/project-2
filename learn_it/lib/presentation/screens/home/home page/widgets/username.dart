@@ -5,6 +5,7 @@ class Username extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final String? username = FirebaseAuth.instance.currentUser!.displayName;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -17,7 +18,7 @@ class Username extends StatelessWidget {
               style: TextStyle(color: Colors.black26, fontSize: 17,fontFamily: 'PoppinsMedium'),
             ),
             Text(
-              username!,
+              username ?? 'user',
               style: const TextStyle(fontSize: 17,fontFamily: 'PoppinsMedium'),
             )
           ],

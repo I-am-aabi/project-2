@@ -115,10 +115,25 @@ class Newcoursecard extends StatelessWidget {
                 width: double.infinity,
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.network(
-                      img,
-                      fit: BoxFit.fill,
-                    ))),
+                    child: Image.network(img, fit: BoxFit.fill, errorBuilder:
+                        (BuildContext context, Object exception, stackTrace) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Icon(
+                              Icons.wifi_off,
+                              color: Colors.black,
+                            ),
+                            Text(
+                              'Check your network connection',
+                              style: TextStyle(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      );
+                    }))),
             Text(
               title,
               style: const TextStyle(fontSize: 14, fontFamily: 'Poppinsthin'),

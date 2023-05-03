@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:teach_it/presentation/screens/home/widgets/choose_image.dart';
 
 class Addcourse extends StatefulWidget {

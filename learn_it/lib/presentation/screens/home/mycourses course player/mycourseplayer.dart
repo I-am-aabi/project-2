@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:learn_it/presentation/screens/home/course%20preview/widgets/floatingaction.dart';
-import 'package:learn_it/presentation/screens/home/course%20preview/widgets/lesson.dart';
 import 'package:learn_it/presentation/screens/home/mycourses%20course%20player/widgets/mylessons.dart';
 import 'package:learn_it/presentation/screens/home/widgets/heading.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,7 +46,7 @@ class _MyCourseplayState extends State<MyCourseplay> {
       watchedVideos.add(metaData.videoId);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setStringList('watchedVideos${widget.courseid}', watchedVideos);
-      print(watchedVideos);
+      // print(watchedVideos);
     }
   }
 
