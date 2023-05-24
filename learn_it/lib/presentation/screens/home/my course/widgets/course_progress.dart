@@ -32,8 +32,6 @@ class _CoursecardState extends State<Coursecard> {
     setState(() {
       watchedVideos =
           prefs.getStringList('watchedVideos${widget.videoid}') ?? [];
-
-          
     });
   }
 

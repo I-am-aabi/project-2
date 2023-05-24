@@ -44,8 +44,11 @@ class _MyCourseplayState extends State<MyCourseplay> {
   void _onVideoEnd(YoutubeMetaData metaData) async {
     if (!watchedVideos.contains(metaData.videoId)) {
       watchedVideos.add(metaData.videoId);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setStringList('watchedVideos${widget.courseid}', watchedVideos);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+      setState(()  {    
+        prefs.setStringList('watchedVideos${widget.courseid}', watchedVideos);
+      });
+
       // print(watchedVideos);
     }
   }

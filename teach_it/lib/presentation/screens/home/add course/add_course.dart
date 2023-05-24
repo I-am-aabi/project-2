@@ -171,7 +171,10 @@ class _AddcourseState extends State<Addcourse> {
             'discriptions': [],
             'price': pricecontroller.text.toString(),
             'category': dropdownvalue,
-            'imgurl' : imageurl
+            'imgurl' : imageurl,
+            'videoid' : DateTime.now().toString(),
+            'lectures' : 0.toString()
+
           });
           titlecontroller.clear();
           discriptioncontroller.clear();
